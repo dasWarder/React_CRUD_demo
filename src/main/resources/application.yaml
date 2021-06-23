@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    username: user
+    password: password
+    url: jdbc:postgresql://localhost:8082/client-crm
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    generate-ddl: true
+    show-sql: true
+server:
+  port: 8083

@@ -28,6 +28,5 @@ public class Populator implements CommandLineRunner {
         clientService.saveClient(TEST_CLIENT_1);
         clientService.saveClient(TEST_CLIENT_2);
         clientService.saveClient(TEST_CLIENT_3);
-
     }
 }
