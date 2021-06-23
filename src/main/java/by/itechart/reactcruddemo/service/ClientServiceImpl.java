@@ -42,8 +42,11 @@ public class ClientServiceImpl implements ClientService {
 
         Optional<Client> possibleClientById = clientRepository.findById(clientId);
         Client validatedClient = validateOptional(possibleClientById, Client.class);
+        Client clientWithValidId = setClientBodyId(validatedClient.getId(), clientBody);
 
-        return validatedClient;
+        Client storedUpdatedClient = clientRepository.save(clientWithValidId);
+
+        return storedUpdatedClient;
     }
 
     @Override
@@ -87,5 +90,13 @@ public class ClientServiceImpl implements ClientService {
         List<Client> clients = (List) clientRepository.findAll();
 
         return clients;
+    }
+
+    private Client setClientBodyId(Long clientId, Client clientBody) {
+
+        Client clientToUpdate = clientBody;
+        clientToUpdate.setId(clientId);
+
+        return clientToUpdate;
     }
 }

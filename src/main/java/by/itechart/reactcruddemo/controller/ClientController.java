@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URISyntaxException;
 import java.util.List;
 
-@RestController("/clients")
+
+@RestController
+@RequestMapping("/clients")
 public class ClientController {
 
     private final ClientService clientService;
