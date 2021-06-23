@@ -9,7 +9,7 @@
 Backend:
 <li> Spring Boot </li>
 <li> Data Jpa </li>
-<li> H2 Embedded </li>
+<li> Postgre SQL </li>
 <li> Lombok </li>
 
 <br>
