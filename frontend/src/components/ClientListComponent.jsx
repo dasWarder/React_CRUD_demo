@@ -12,20 +12,40 @@ class ClientListComponent extends Component {
         };
 
         this.addClient = this.addClient.bind(this);
+        this.editClient = this.editClient.bind(this);
+        this.getClient = this.getClient.bind(this);
     }
 
     addClient() {
         console.log('Routing to /clients/client');
 
-        this.props.history.push("/clients/client");
+        this.props.history.push('/clients/client/store/' + null);
+    }
+
+    editClient(id) {
+        console.log('Routing to /clients/client/store/',id )
+
+        this.props.history.push(`/clients/client/store/${id}`);
+    }
+
+    getClient(id) {
+        console.log('Routing to /clients/client/', id);
+
+        this.props.history.push(`/clients/client/${id}`);
+    }
+
+    deleteClient(id) {
+        console.log('Delete client with id=', id);
+
+        ClientService.deleteClientById(id).then(
+            window.location.reload()
+        )
     }
 
     componentDidMount() {
         ClientService.getClients().then(response => {
             this.setState( { clients: response.data });
         });
-
-        ClientService.saveClient();
     }
 
 
@@ -56,8 +76,9 @@ class ClientListComponent extends Component {
                                             <td>{ client.lastName }</td>
                                             <td>{ client.email }</td>
                                             <td>
-                                                <button className={ "btn btn-warning btn-sm mx-1 col-md-2" }>Edit</button>
-                                                <button className={ "btn btn-danger btn-sm mx-1 col-md-2" }>Delete</button>
+                                                <button onClick={ () => this.getClient(client.id) } className={ "btn btn-success btn-sm mx-1 col-md-2" }>Details</button>
+                                                <button onClick={ () => this.editClient(client.id) } className={ "btn btn-warning btn-sm mx-1 col-md-2" }>Edit</button>
+                                                <button onClick={ () => this.deleteClient(client.id) } className={ "btn btn-danger btn-sm mx-1 col-md-2" }>Delete</button>
                                             </td>
                                         </tr>
                                 )

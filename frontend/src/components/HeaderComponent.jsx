@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AddClientComponent from "./AddClientComponent";
 
 class HeaderComponent extends Component {
 
@@ -8,6 +9,7 @@ class HeaderComponent extends Component {
         this.state = {
 
         }
+
     }
 
 
@@ -16,8 +18,8 @@ class HeaderComponent extends Component {
             <div className={ "row" }>
                 <header>
                     <div>
-                        <h1 className={ "text-center text-info text-secondary" }>List of clients</h1>
-                        <p className={ "text-center text-secondary" }>A full list of your clients available here</p>
+                        <h1 className={ "text-center text-info text-secondary" }>Clients CRM</h1>
+                        <p className={ "text-center text-secondary" }>Manage your clients</p>
                     </div>
                 </header>
             </div>

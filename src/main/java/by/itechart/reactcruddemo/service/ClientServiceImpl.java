@@ -2,16 +2,14 @@ package by.itechart.reactcruddemo.service;
 
 import by.itechart.reactcruddemo.model.Client;
 import by.itechart.reactcruddemo.repository.ClientRepository;
-import by.itechart.reactcruddemo.util.validation.OptionalValidator;
-import by.itechart.reactcruddemo.util.validation.ParamsValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-import static by.itechart.reactcruddemo.util.validation.OptionalValidator.*;
-import static by.itechart.reactcruddemo.util.validation.ParamsValidator.*;
+import static by.itechart.reactcruddemo.util.validation.OptionalValidator.validateOptional;
+import static by.itechart.reactcruddemo.util.validation.ParamsValidator.validateInputParams;
 
 @Slf4j
 @Service
@@ -40,8 +38,8 @@ public class ClientServiceImpl implements ClientService {
         validateInputParams(clientId, clientBody);
         log.info("Updating a single client with ID = {}", clientId);
 
-        Optional<Client> possibleClientById = clientRepository.findById(clientId);
-        Client validatedClient = validateOptional(possibleClientById, Client.class);
+        Optional<Client> possibleClient = clientRepository.findById(clientId);
+        Client validatedClient = validateOptional(possibleClient, Client.class);
         Client clientWithValidId = setClientBodyId(validatedClient.getId(), clientBody);
 
         Client storedUpdatedClient = clientRepository.save(clientWithValidId);

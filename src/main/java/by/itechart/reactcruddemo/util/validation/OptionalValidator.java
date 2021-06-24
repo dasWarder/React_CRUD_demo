@@ -3,24 +3,20 @@ package by.itechart.reactcruddemo.util.validation;
 import by.itechart.reactcruddemo.exception.ClientNotFoundException;
 import by.itechart.reactcruddemo.model.Client;
 import javassist.NotFoundException;
-import org.hibernate.ObjectNotFoundException;
 
 import java.util.Optional;
 
 public class OptionalValidator {
 
+    public static final String CLIENT_NOT_FOUND_EXCEPTION_MSG = "The client hasn't been found";
+
+    public static final String OBJECT_NOT_FOUND_EXCEPTION_MSG = "The object hasn't been found";
+
+
     public static <T> T validateOptional(Optional<T> optional, Class aClass) throws Exception {
-
-        if(optional.isPresent()) {
-
-            T receivedObject = optional.get();
-
-            return receivedObject;
-        }
-
         Exception validationEntityException = getValidationEntityException(aClass);
 
-        throw validationEntityException;
+        return optional.orElseThrow(() -> validationEntityException);
     }
 
 
@@ -30,11 +26,11 @@ public class OptionalValidator {
         if (aClass.getName().equals(
                                     Client.class.getName())) {
 
-            return new ClientNotFoundException("The client hasn't been found");
+            return new ClientNotFoundException(CLIENT_NOT_FOUND_EXCEPTION_MSG);
 
         } else {
 
-            return new NotFoundException("The object hasn't been found");
+            return new NotFoundException(OBJECT_NOT_FOUND_EXCEPTION_MSG);
 
         }
     }
